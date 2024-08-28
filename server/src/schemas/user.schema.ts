@@ -1,24 +1,18 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
-import { HydratedDocument, SchemaType, SchemaTypes } from 'mongoose'
+import mongoose, { HydratedDocument, SchemaTypes, Types } from 'mongoose'
 import { QRCode } from './QRCode.schema'
 
 export type UserDocument = HydratedDocument<User>
 
 enum plan {
     FREE,
-    PRO
-}  
+    PRO,
+}
 
-@Schema({timestamps: true})
+@Schema({ timestamps: true })
 export class User {
     @Prop({
         unique: true,
-        required: true,
-    })
-    id: number
-
-    @Prop({
-        unique: true
     })
     email: string
 
@@ -26,7 +20,7 @@ export class User {
     password: string
 
     @Prop({
-        default: plan.FREE
+        default: plan.FREE,
     })
     plan: plan
 

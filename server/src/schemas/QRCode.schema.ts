@@ -8,10 +8,10 @@ enum type {
     LINK,
     PDF,
     EMAIL,
-    PHONE_NUMBER
-}  
+    PHONE_NUMBER,
+}
 
-@Schema({timestamps: true})
+@Schema({ timestamps: true })
 export class QRCode {
     @Prop({
         unique: true,
@@ -21,23 +21,23 @@ export class QRCode {
 
     @Prop({
         unique: true,
-        required: true
+        required: true,
     })
     shortLink: string
 
-    @Prop({ type: SchemaTypes.ObjectId, ref: User.name })
+    @Prop({ type: SchemaTypes.ObjectId, ref: (() => User).name })
     user: User | null
 
-    @Prop({default: null})
+    @Prop({ default: null })
     folder: string | null
 
-    @Prop({default: false})
+    @Prop({ default: false })
     isTracked: boolean
 
-    @Prop({required: true})
+    @Prop({ required: true })
     name: string
 
-    @Prop({required: true})
+    @Prop({ required: true })
     type: type
 }
 
