@@ -1,10 +1,10 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
-import { HydratedDocument, SchemaTypes } from 'mongoose'
-import { User } from './user.schema'
+import { HydratedDocument, SchemaTypes, Types } from 'mongoose'
+import { User } from '../../user/schemas/user.schema'
 
 export type QRCodeDocument = HydratedDocument<QRCode>
 
-enum type {
+export enum type {
     LINK,
     PDF,
     EMAIL,
@@ -17,16 +17,10 @@ export class QRCode {
         unique: true,
         required: true,
     })
-    id: number
-
-    @Prop({
-        unique: true,
-        required: true,
-    })
     shortLink: string
 
-    @Prop({ type: SchemaTypes.ObjectId, ref: (() => User).name })
-    user: User | null
+    @Prop({ type: Types.ObjectId, ref: (() => User).name })
+    user: Types.ObjectId
 
     @Prop({ default: null })
     folder: string | null
