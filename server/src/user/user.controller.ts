@@ -1,11 +1,13 @@
 import {
     Controller,
-    Get,
     Post,
     Body,
     Patch,
     Param,
     Delete,
+    BadRequestException,
+    NotFoundException,
+    InternalServerErrorException,
 } from '@nestjs/common'
 import { UserService } from './user.service'
 import { CreateUserDto } from './dto/create-user.dto'
@@ -17,26 +19,36 @@ export class UserController {
 
     @Post()
     create(@Body() createUserDto: CreateUserDto) {
-        return this.userService.create(createUserDto)
-    }
-
-    @Get()
-    findAll() {
-        return this.userService.findAll()
-    }
-
-    @Get(':id')
-    findOne(@Param('id') id: string) {
-        return this.userService.findOne(id)
+        try {
+            return this.userService.create(createUserDto)
+        } catch (error) {
+            throw new BadRequestException('Fail to create user')
+        }
     }
 
     @Patch(':id')
     update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-        return this.userService.update(id, updateUserDto)
+        try {
+            const updatedUser = this.userService.update(id, updateUserDto)
+            if (!updatedUser) throw new NotFoundException('user not found')
+            return updatedUser
+        } catch (error) {
+            throw new InternalServerErrorException(
+                `fail to update user with id: ${id}`
+            )
+        }
     }
 
     @Delete(':id')
     remove(@Param('id') id: string) {
-        return this.userService.remove(id)
+        try {
+            const deletedUser = this.userService.remove(id)
+            if (!deletedUser) throw new NotFoundException('user not found')
+            return deletedUser
+        } catch (error) {
+            throw new InternalServerErrorException(
+                `fail to delete user with id: ${id}`
+            )
+        }
     }
 }

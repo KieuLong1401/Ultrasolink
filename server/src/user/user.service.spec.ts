@@ -1,14 +1,16 @@
 import { Test, TestingModule } from '@nestjs/testing'
 import { UserService } from './user.service'
-import { User } from '../schemas/user.schema'
+import { plan, User } from './schemas/user.schema'
 import { getModelToken } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
+import { CreateUserDto } from './dto/create-user.dto'
+import { UpdateUserDto } from './dto/update-user.dto'
 
 const mockUser = {
     _id: '66ce7c395b09800d5de0ab1e',
     email: 'test@gmail.com',
     password: 'test',
-    plan: 0,
+    plan: plan.FREE,
     QRCode: [],
     createdAt: '2024-08-28T01:24:10.010Z',
     updatedAt: '2024-08-28T01:24:10.010Z',
@@ -16,14 +18,11 @@ const mockUser = {
 }
 
 const mockUserModel = {
-    find: jest
-        .fn()
-        .mockReturnValue({ exec: jest.fn().mockReturnValue([mockUser]) }),
-    findById: jest
-        .fn()
-        .mockReturnValue({ exec: jest.fn().mockReturnValue(mockUser) }),
     create: jest.fn().mockReturnValue(mockUser),
     findByIdAndDelete: jest
+        .fn()
+        .mockReturnValue({ exec: jest.fn().mockReturnValue(mockUser) }),
+    findByIdAndUpdate: jest
         .fn()
         .mockReturnValue({ exec: jest.fn().mockReturnValue(mockUser) }),
 }
@@ -51,23 +50,30 @@ describe('UserService', () => {
         expect(service).toBeDefined()
     })
 
-    it('should return an array of users', async () => {
-        const users = await service.findAll()
-        expect(users).toEqual([mockUser])
-    })
-
-    it('should return a single user', async () => {
-        const user = await service.findOne('someId')
-        expect(user).toEqual(mockUser)
-    })
-
     it('should create a new user', async () => {
-        const newUser = await service.create(mockUser as User)
+        const createUserDto: CreateUserDto = {
+            email: 'new@gmail.com',
+            password: 'new',
+        }
+        const newUser = await service.create(createUserDto)
         expect(newUser).toEqual(mockUser)
+        expect(model.create).toHaveBeenCalledWith(createUserDto)
     })
 
     it('should delete a user', async () => {
-        const deletedUser = await service.remove('someId')
-        expect(deletedUser).toEqual(mockUser)
+        const id = '66ce7c395b09800d5de0ab1e'
+        const removedUser = await service.remove(id)
+        expect(removedUser).toEqual(mockUser)
+        expect(model.findByIdAndDelete).toHaveBeenCalledWith(id)
+    })
+    it('should update an user', async () => {
+        const id = '66ce7c395b09800d5de0ab1e'
+        const updateUserDto: UpdateUserDto = {
+            email: 'update@gmail.com',
+            password: 'update',
+        }
+        const updatedUser = await service.update(id, updateUserDto)
+        expect(updatedUser).toEqual(mockUser)
+        expect(model.findByIdAndUpdate).toHaveBeenCalledWith(id, updateUserDto)
     })
 })

@@ -1,10 +1,10 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
-import mongoose, { HydratedDocument, SchemaTypes, Types } from 'mongoose'
-import { QRCode } from './QRCode.schema'
+import { HydratedDocument, SchemaTypes, Types } from 'mongoose'
+import { QRCode } from '../../qrcode/schemas/qrcode.schema'
 
 export type UserDocument = HydratedDocument<User>
 
-enum plan {
+export enum plan {
     FREE,
     PRO,
 }
@@ -24,7 +24,7 @@ export class User {
     })
     plan: plan
 
-    @Prop([{ type: SchemaTypes.ObjectId, ref: QRCode.name }])
+    @Prop([{ type: Types.ObjectId, ref: (() => QRCode).name }])
     QRCode: QRCode[]
 }
 

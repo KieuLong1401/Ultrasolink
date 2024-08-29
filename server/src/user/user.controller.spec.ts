@@ -1,7 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing'
 import { UserController } from './user.controller'
 import { UserService } from './user.service'
-import { User } from '../schemas/user.schema'
+import { CreateUserDto } from './dto/create-user.dto'
+import { UpdateUserDto } from './dto/update-user.dto'
 
 const mockUser = {
     _id: '66ce7c395b09800d5de0ab1e',
@@ -14,8 +15,6 @@ const mockUser = {
     __v: 0,
 }
 const mockUserService = {
-    findAll: jest.fn().mockResolvedValue([mockUser]),
-    findOne: jest.fn().mockResolvedValue(mockUser),
     create: jest.fn().mockResolvedValue(mockUser),
     update: jest.fn().mockResolvedValue(mockUser),
     remove: jest.fn().mockResolvedValue(mockUser),
@@ -45,23 +44,25 @@ describe('UserController', () => {
         expect(controller).toBeDefined()
     })
 
-    it('should return an array of users', async () => {
-        const users = await controller.findAll()
-        expect(users).toEqual([mockUser])
-    })
-
-    it('should return a single user', async () => {
-        const user = await controller.findOne('someId')
-        expect(user).toEqual(mockUser)
-    })
-
     it('should create a new user', async () => {
-        const newUser = await controller.create(mockUser as User)
+        const newUser = await controller.create(mockUser as CreateUserDto)
         expect(newUser).toEqual(mockUser)
+        expect(service.create).toHaveBeenCalledWith(mockUser)
     })
 
     it('should delete a user', async () => {
-        const deletedUser = await controller.remove('someId')
+        const id = '66ce7c395b09800d5de0ab1e'
+        const deletedUser = await controller.remove(id)
         expect(deletedUser).toEqual(mockUser)
+        expect(service.remove).toHaveBeenCalledWith(id)
+    })
+    it('should update a user', async () => {
+        const id = '66ce7c395b09800d5de0ab1e'
+        const updatedUser = await controller.update(
+            id,
+            mockUser as UpdateUserDto
+        )
+        expect(updatedUser).toEqual(mockUser)
+        expect(service.update).toHaveBeenCalledWith(id, mockUser)
     })
 })
