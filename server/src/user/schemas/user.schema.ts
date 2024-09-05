@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
-import { HydratedDocument, SchemaTypes, Types } from 'mongoose'
-import { QRCode } from '../../qrcode/schemas/qrcode.schema'
+import { HydratedDocument, Types } from 'mongoose'
+import { QRCode } from '../../qrCode/schemas/qrCode.schema'
 
 export type UserDocument = HydratedDocument<User>
 

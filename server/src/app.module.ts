@@ -3,7 +3,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config'
 import { config } from './config/config'
 import { MongooseModule } from '@nestjs/mongoose'
 import { UserModule } from './user/user.module'
-import { QrcodeModule } from './qrcode/qrcode.module';
+import { QrcodeModule } from './qrCode/qrCode.module'
+import { ShortLinkModule } from './shortLink/shortLink.module'
+import { ScanModule } from './scan/scan.module';
 
 @Module({
     imports: [
@@ -24,6 +26,8 @@ import { QrcodeModule } from './qrcode/qrcode.module';
         }),
         UserModule,
         QrcodeModule,
+        ShortLinkModule,
+        ScanModule,
     ],
     controllers: [],
     providers: [],
