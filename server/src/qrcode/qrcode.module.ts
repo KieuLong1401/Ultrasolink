@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common'
-import { QrcodeService } from './qrcode.service'
-import { QrcodeController } from './qrcode.controller'
+import { QrcodeService } from './qrCode.service'
+import { QrcodeController } from './qrCode.controller'
 import { MongooseModule } from '@nestjs/mongoose'
-import { QRCode, QRCodeSchema } from './schemas/QRCode.schema'
+import { QRCode, QRCodeSchema } from './schemas/qrCode.schema'
 
 @Module({
     imports: [

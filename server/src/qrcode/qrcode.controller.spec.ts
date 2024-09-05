@@ -1,9 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing'
-import { QrcodeController } from './qrcode.controller'
-import { QrcodeService } from './qrcode.service'
-import { type } from './schemas/qrcode.schema'
-import { CreateQrcodeDto } from './dto/create-qrcode.dto'
-import { UpdateQrcodeDto } from './dto/update-qrcode.dto'
+import { QrcodeController } from './qrCode.controller'
+import { QrcodeService } from './qrCode.service'
+import { type } from './schemas/qrCode.schema'
+import { CreateQrcodeDto } from './dto/create-qrCode.dto'
+import { UpdateQrcodeDto } from './dto/update-qrCode.dto'
 
 const mockQrCode = {
     _id: '66ce7c395b09800d5de0ab1e',
@@ -20,6 +20,7 @@ const mockQrCode = {
 
 const mockQrCodeService = {
     findOne: jest.fn().mockResolvedValue(mockQrCode),
+    findByUserId: jest.fn().mockResolvedValue([mockQrCode]),
     create: jest.fn().mockResolvedValue(mockQrCode),
     update: jest.fn().mockResolvedValue(mockQrCode),
     remove: jest.fn().mockResolvedValue(mockQrCode),
@@ -54,6 +55,13 @@ describe('QrcodeController', () => {
         const qrCode = await controller.findOne(id)
         expect(qrCode).toEqual(mockQrCode)
         expect(service.findOne).toHaveBeenCalledWith(id)
+    })
+
+    it('should return qr codes of an user', async () => {
+        const id = '66ce7c395b09800d5de0ab1e'
+        const qrCodes = await controller.findByUserId(id)
+        expect(qrCodes).toEqual([mockQrCode])
+        expect(service.findByUserId).toHaveBeenCalledWith(id)
     })
 
     it('should create a new qrCode', async () => {

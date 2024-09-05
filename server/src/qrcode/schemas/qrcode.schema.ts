@@ -1,6 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
-import { HydratedDocument, SchemaTypes, Types } from 'mongoose'
+import { HydratedDocument, Types } from 'mongoose'
 import { User } from '../../user/schemas/user.schema'
+import { ShortLink } from '../../shortLink/schemas/shortLink.schema'
+import { Scan } from 'src/scan/schemas/scan.schema'
 
 export type QRCodeDocument = HydratedDocument<QRCode>
 
@@ -12,15 +14,17 @@ export enum type {
 }
 
 @Schema({ timestamps: true })
-export class QRCode {
+export class QRCode extends Document {
     @Prop({
         unique: true,
         required: true,
+        type: Types.ObjectId,
+        ref: (() => ShortLink).name,
     })
-    shortLink: string
+    shortLink: ShortLink
 
     @Prop({ type: Types.ObjectId, ref: (() => User).name })
-    user: Types.ObjectId
+    user: User
 
     @Prop({ default: null })
     folder: string | null
@@ -33,6 +37,17 @@ export class QRCode {
 
     @Prop({ required: true })
     type: type
+
+    @Prop([{ type: Types.ObjectId, ref: (() => Scan).name }])
+    Scan: Scan[]
 }
 
 export const QRCodeSchema = SchemaFactory.createForClass(QRCode)
+
+QRCodeSchema.pre('findOneAndDelete', async function (next) {
+    const query = this.getQuery()
+    if (query && query._id) {
+        await new this.model(Scan.name).deleteMany({ qrCode: query._id })
+    }
+    next()
+})

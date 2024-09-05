@@ -10,10 +10,10 @@ import {
     NotFoundException,
     InternalServerErrorException,
 } from '@nestjs/common'
-import { QrcodeService } from './qrcode.service'
-import { CreateQrcodeDto } from './dto/create-qrcode.dto'
-import { UpdateQrcodeDto } from './dto/update-qrcode.dto'
-import { NotFoundError } from 'rxjs'
+import { QrcodeService } from './qrCode.service'
+import { CreateQrcodeDto } from './dto/create-qrCode.dto'
+import { UpdateQrcodeDto } from './dto/update-qrCode.dto'
+import { get } from 'http'
 
 @Controller('qrcode')
 export class QrcodeController {
@@ -37,6 +37,22 @@ export class QrcodeController {
         } catch (error) {
             throw new InternalServerErrorException(
                 `fail to find the qr code with id: ${id}`
+            )
+        }
+    }
+
+    @Get('user/:id')
+    findByUserId(@Param('id') id: string) {
+        try {
+            const qrCodes = this.qrcodeService.findByUserId(id)
+            if (!qrCodes)
+                throw new NotFoundException(
+                    `qr codes of user with id ${id} not found`
+                )
+            return qrCodes
+        } catch (error) {
+            throw new InternalServerErrorException(
+                `fail to find qr code of user with id ${id}`
             )
         }
     }

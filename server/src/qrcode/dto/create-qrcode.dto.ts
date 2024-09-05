@@ -1,4 +1,4 @@
-import { type } from '../schemas/QRCode.schema'
+import { type } from '../schemas/qrCode.schema'
 
 export class CreateQrcodeDto {
     shortLink: string
