@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { Types } from 'mongoose'
-import { QRCode } from 'src/qrCode/schemas/qrCode.schema'
+import { QRCode } from '../../qrCode/schemas/qrCode.schema'
 
 @Schema({ timestamps: true })
 export class Scan {

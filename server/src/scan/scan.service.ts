@@ -15,8 +15,4 @@ export class ScanService {
     findByQrCode(qrCodeId: string): Promise<Scan[]> {
         return this.ScanModel.find({ qrCode: qrCodeId }).exec()
     }
-
-    remove(id: string): Promise<Scan> {
-        return this.ScanModel.findByIdAndDelete(id).exec()
-    }
 }

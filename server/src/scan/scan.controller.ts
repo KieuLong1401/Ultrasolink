@@ -3,13 +3,13 @@ import {
     Get,
     Post,
     Body,
-    Patch,
     Param,
-    Delete,
+    BadRequestException,
+    NotFoundException,
+    InternalServerErrorException,
 } from '@nestjs/common'
 import { ScanService } from './scan.service'
 import { CreateScanDto } from './dto/create-scan.dto'
-import { UpdateScanDto } from './dto/update-scan.dto'
 
 @Controller('scan')
 export class ScanController {
@@ -17,16 +17,26 @@ export class ScanController {
 
     @Post()
     create(@Body() createScanDto: CreateScanDto) {
-        return this.scanService.create(createScanDto)
+        try {
+            return this.scanService.create(createScanDto)
+        } catch (error) {
+            throw new BadRequestException('fail to create scan')
+        }
     }
 
-    @Get()
-    findAll() {
-        return this.scanService.findAll()
-    }
-
-    @Delete(':id')
-    remove(@Param('id') id: string) {
-        return this.scanService.remove(id)
+    @Get('qrCode/:id')
+    findByQrCode(@Param('id') id: string) {
+        try {
+            const scans = this.scanService.findByQrCode(id)
+            if (!scans)
+                throw new NotFoundException(
+                    `scans of qr code with id ${id} not found`
+                )
+            return scans
+        } catch (error) {
+            throw new InternalServerErrorException(
+                `fail to find scans of qr code with id ${id}`
+            )
+        }
     }
 }
