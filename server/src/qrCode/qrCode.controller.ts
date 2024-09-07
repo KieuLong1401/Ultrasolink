@@ -13,7 +13,6 @@ import {
 import { QrcodeService } from './qrCode.service'
 import { CreateQrcodeDto } from './dto/create-qrCode.dto'
 import { UpdateQrcodeDto } from './dto/update-qrCode.dto'
-import { get } from 'http'
 
 @Controller('qrcode')
 export class QrcodeController {

@@ -1,8 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
-import { HydratedDocument, Types } from 'mongoose'
+import { Document, HydratedDocument, Types } from 'mongoose'
 import { User } from '../../user/schemas/user.schema'
 import { ShortLink } from '../../shortLink/schemas/shortLink.schema'
-import { Scan } from 'src/scan/schemas/scan.schema'
+import { Scan } from '../../scan/schemas/scan.schema'
 
 export type QRCodeDocument = HydratedDocument<QRCode>
 
