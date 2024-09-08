@@ -1,10 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing'
-import { QrcodeService } from './qrCode.service'
-import { QRCode, type } from './schemas/qrCode.schema'
+import { QrCodeService } from './qrCode.service'
+import { QrCode, type } from './schemas/qrCode.schema'
 import { Model } from 'mongoose'
 import { getModelToken } from '@nestjs/mongoose'
-import { CreateQrcodeDto } from './dto/create-qrCode.dto'
-import { UpdateQrcodeDto } from './dto/update-qrCode.dto'
+import { CreateQrCodeDto } from './dto/create-qrCode.dto'
+import { UpdateQrCodeDto } from './dto/update-qrCode.dto'
 
 const mockQrCode = {
     _id: '66ce7c395b09800d5de0ab1e',
@@ -12,7 +12,7 @@ const mockQrCode = {
     user: '66ce7c395b09800d5de0ab1a',
     folder: null,
     isTracked: false,
-    name: 'QRCode 1',
+    name: 'QrCode 1',
     type: type.LINK,
     createdAt: '2024-08-28T01:24:10.010Z',
     updatedAt: '2024-08-28T01:24:10.010Z',
@@ -35,23 +35,23 @@ const mockQrCodeModel = {
         .mockReturnValue({ exec: jest.fn().mockReturnValue(mockQrCode) }),
 }
 
-describe('QrcodeService', () => {
-    let service: QrcodeService
-    let model: Model<QRCode>
+describe('QrCodeService', () => {
+    let service: QrCodeService
+    let model: Model<QrCode>
 
     beforeEach(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
-                QrcodeService,
+                QrCodeService,
                 {
-                    provide: getModelToken(QRCode.name),
+                    provide: getModelToken(QrCode.name),
                     useValue: mockQrCodeModel,
                 },
             ],
         }).compile()
 
-        service = module.get<QrcodeService>(QrcodeService)
-        model = module.get<Model<QRCode>>(getModelToken(QRCode.name))
+        service = module.get<QrCodeService>(QrCodeService)
+        model = module.get<Model<QrCode>>(getModelToken(QrCode.name))
     })
 
     it('should be defined', () => {
@@ -73,12 +73,12 @@ describe('QrcodeService', () => {
     })
 
     it('should create a new qrCode', async () => {
-        const createQrCodeDto: CreateQrcodeDto = {
+        const createQrCodeDto: CreateQrCodeDto = {
             shortLink: 'https://a.b/c',
             user: '66ce7c395b09800d5de0ab1a',
             folder: null,
             isTracked: false,
-            name: 'QRCode 1',
+            name: 'QrCode 1',
             type: type.LINK,
         }
         const newQrCode = await service.create(createQrCodeDto)
@@ -94,16 +94,16 @@ describe('QrcodeService', () => {
     })
     it('should update an qrCode', async () => {
         const id = '66ce7c395b09800d5de0ab1e'
-        const updateQrCodeDto: UpdateQrcodeDto = {
+        const updateQrCodeDto: UpdateQrCodeDto = {
             shortLink: 'https://a.b/c',
             user: '66ce7c395b09800d5de0ab1a',
             folder: null,
             isTracked: false,
-            name: 'QRCode 1',
+            name: 'QrCode 1',
             type: type.LINK,
         }
-        const updatedQrcode = await service.update(id, updateQrCodeDto)
-        expect(updatedQrcode).toEqual(mockQrCode)
+        const updatedQrCode = await service.update(id, updateQrCodeDto)
+        expect(updatedQrCode).toEqual(mockQrCode)
         expect(model.findByIdAndUpdate).toHaveBeenCalledWith(
             id,
             updateQrCodeDto

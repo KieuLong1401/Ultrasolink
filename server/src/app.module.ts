@@ -3,9 +3,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config'
 import { config } from './config/config'
 import { MongooseModule } from '@nestjs/mongoose'
 import { UserModule } from './user/user.module'
-import { QrcodeModule } from './qrCode/qrCode.module'
+import { QrCodeModule } from './qrCode/qrCode.module'
 import { ShortLinkModule } from './shortLink/shortLink.module'
-import { ScanModule } from './scan/scan.module';
+import { ScanModule } from './scan/scan.module'
 
 @Module({
     imports: [
@@ -25,7 +25,7 @@ import { ScanModule } from './scan/scan.module';
             inject: [ConfigService],
         }),
         UserModule,
-        QrcodeModule,
+        QrCodeModule,
         ShortLinkModule,
         ScanModule,
     ],

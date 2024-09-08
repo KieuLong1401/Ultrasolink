@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { Types } from 'mongoose'
-import { QRCode } from '../../qrCode/schemas/qrCode.schema'
+import { QrCode } from '../../qrCode/schemas/qrCode.schema'
 
 @Schema({ timestamps: true })
 export class Scan {
@@ -13,8 +13,8 @@ export class Scan {
     @Prop({ required: true })
     device: string
 
-    @Prop({ type: Types.ObjectId, ref: (() => QRCode).name })
-    qrCode: QRCode
+    @Prop({ type: Types.ObjectId, ref: (() => QrCode).name })
+    qrCode: QrCode
 }
 
 export const ScanSchema = SchemaFactory.createForClass(Scan)

@@ -4,7 +4,7 @@ import { User } from '../../user/schemas/user.schema'
 import { ShortLink } from '../../shortLink/schemas/shortLink.schema'
 import { Scan } from '../../scan/schemas/scan.schema'
 
-export type QRCodeDocument = HydratedDocument<QRCode>
+export type QrCodeDocument = HydratedDocument<QrCode>
 
 export enum type {
     LINK,
@@ -14,7 +14,7 @@ export enum type {
 }
 
 @Schema({ timestamps: true })
-export class QRCode extends Document {
+export class QrCode extends Document {
     @Prop({
         unique: true,
         required: true,
@@ -42,9 +42,9 @@ export class QRCode extends Document {
     Scan: Scan[]
 }
 
-export const QRCodeSchema = SchemaFactory.createForClass(QRCode)
+export const QrCodeSchema = SchemaFactory.createForClass(QrCode)
 
-QRCodeSchema.pre('findOneAndDelete', async function (next) {
+QrCodeSchema.pre('findOneAndDelete', async function (next) {
     const query = this.getQuery()
     if (query && query._id) {
         await new this.model(Scan.name).deleteMany({ qrCode: query._id })

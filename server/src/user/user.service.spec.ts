@@ -11,7 +11,7 @@ const mockUser = {
     email: 'test@gmail.com',
     password: 'test',
     plan: plan.FREE,
-    QRCode: [],
+    QrCode: [],
     createdAt: '2024-08-28T01:24:10.010Z',
     updatedAt: '2024-08-28T01:24:10.010Z',
     __v: 0,

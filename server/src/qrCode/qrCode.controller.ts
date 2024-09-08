@@ -10,18 +10,18 @@ import {
     NotFoundException,
     InternalServerErrorException,
 } from '@nestjs/common'
-import { QrcodeService } from './qrCode.service'
-import { CreateQrcodeDto } from './dto/create-qrCode.dto'
-import { UpdateQrcodeDto } from './dto/update-qrCode.dto'
+import { QrCodeService } from './qrCode.service'
+import { CreateQrCodeDto } from './dto/create-qrCode.dto'
+import { UpdateQrCodeDto } from './dto/update-qrCode.dto'
 
-@Controller('qrcode')
-export class QrcodeController {
-    constructor(private readonly qrcodeService: QrcodeService) {}
+@Controller('qr-code')
+export class QrCodeController {
+    constructor(private readonly qrCodeService: QrCodeService) {}
 
     @Post()
-    create(@Body() createQrcodeDto: CreateQrcodeDto) {
+    create(@Body() createQrCodeDto: CreateQrCodeDto) {
         try {
-            return this.qrcodeService.create(createQrcodeDto)
+            return this.qrCodeService.create(createQrCodeDto)
         } catch (error) {
             throw new BadRequestException('fail to create qr code')
         }
@@ -30,7 +30,7 @@ export class QrcodeController {
     @Get(':id')
     findOne(@Param('id') id: string) {
         try {
-            const qrCode = this.qrcodeService.findOne(id)
+            const qrCode = this.qrCodeService.findOne(id)
             if (!qrCode) throw new NotFoundException('qr code not found')
             return qrCode
         } catch (error) {
@@ -43,7 +43,7 @@ export class QrcodeController {
     @Get('user/:id')
     findByUserId(@Param('id') id: string) {
         try {
-            const qrCodes = this.qrcodeService.findByUserId(id)
+            const qrCodes = this.qrCodeService.findByUserId(id)
             if (!qrCodes)
                 throw new NotFoundException(
                     `qr codes of user with id ${id} not found`
@@ -57,10 +57,10 @@ export class QrcodeController {
     }
 
     @Patch(':id')
-    update(@Param('id') id: string, @Body() updateQrcodeDto: UpdateQrcodeDto) {
+    update(@Param('id') id: string, @Body() updateQrCodeDto: UpdateQrCodeDto) {
         try {
-            const updatedQrCode = this.qrcodeService.update(id, updateQrcodeDto)
-            if (!updateQrcodeDto)
+            const updatedQrCode = this.qrCodeService.update(id, updateQrCodeDto)
+            if (!updateQrCodeDto)
                 throw new NotFoundException('qr code not found')
             return updatedQrCode
         } catch (error) {
@@ -73,7 +73,7 @@ export class QrcodeController {
     @Delete(':id')
     remove(@Param('id') id: string) {
         try {
-            const deletedQrCode = this.qrcodeService.remove(id)
+            const deletedQrCode = this.qrCodeService.remove(id)
             if (!deletedQrCode) throw new NotFoundException('qr code not found')
             return deletedQrCode
         } catch (error) {

@@ -1,6 +1,6 @@
 import { type } from '../schemas/qrCode.schema'
 
-export class CreateQrcodeDto {
+export class CreateQrCodeDto {
     shortLink: string
     user: string
     folder: boolean | string

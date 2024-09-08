@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { HydratedDocument, Types } from 'mongoose'
-import { QRCode } from '../../qrCode/schemas/qrCode.schema'
+import { QrCode } from '../../qrCode/schemas/qrCode.schema'
 
 export type UserDocument = HydratedDocument<User>
 
@@ -24,8 +24,8 @@ export class User {
     })
     plan: plan
 
-    @Prop([{ type: Types.ObjectId, ref: (() => QRCode).name }])
-    QRCode: QRCode[]
+    @Prop([{ type: Types.ObjectId, ref: (() => QrCode).name }])
+    QrCode: QrCode[]
 }
 
 export const UserSchema = SchemaFactory.createForClass(User)

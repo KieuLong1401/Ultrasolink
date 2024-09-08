@@ -1,16 +1,16 @@
 import { Module } from '@nestjs/common'
-import { QrcodeService } from './qrCode.service'
-import { QrcodeController } from './qrCode.controller'
+import { QrCodeService } from './qrCode.service'
+import { QrCodeController } from './qrCode.controller'
 import { MongooseModule } from '@nestjs/mongoose'
-import { QRCode, QRCodeSchema } from './schemas/qrCode.schema'
+import { QrCode, QrCodeSchema } from './schemas/qrCode.schema'
 
 @Module({
     imports: [
         MongooseModule.forFeature([
-            { name: QRCode.name, schema: QRCodeSchema },
+            { name: QrCode.name, schema: QrCodeSchema },
         ]),
     ],
-    controllers: [QrcodeController],
-    providers: [QrcodeService],
+    controllers: [QrCodeController],
+    providers: [QrCodeService],
 })
-export class QrcodeModule {}
+export class QrCodeModule {}
