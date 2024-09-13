@@ -40,12 +40,12 @@ describe('ScanController', () => {
     const newScan = await controller.create(mockScan as CreateScanDto)
     expect(newScan).toEqual(mockScan)
     expect(service.create).toHaveBeenCalledWith(mockScan)
-})
-it('should return scans of a qr code', async () => {
-  const id = '66ce7c395b09800d5de0ab1e'
-  const scans = await controller.findByQrCode(id)
-  expect(scans).toEqual([mockScan])
-  expect(service.findByQrCode).toHaveBeenCalledWith(id)
-})
+  })
+  it('should return scans of a qr code', async () => {
+      const id = '66ce7c395b09800d5de0ab1e'
+      const scans = await controller.findByQrCode(id)
+      expect(scans).toEqual([mockScan])
+      expect(service.findByQrCode).toHaveBeenCalledWith(id)
+  })
 
 });
