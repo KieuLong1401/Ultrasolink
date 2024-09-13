@@ -2,10 +2,10 @@ import { Module } from '@nestjs/common'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { config } from './config/config'
 import { MongooseModule } from '@nestjs/mongoose'
-import { UserModule } from './user/user.module'
-import { QrCodeModule } from './qrCode/qrCode.module'
-import { ShortLinkModule } from './shortLink/shortLink.module'
-import { ScanModule } from './scan/scan.module'
+import { UserModule } from './modules/user/user.module'
+import { QrCodeModule } from './modules/qrCode/qrCode.module'
+import { ShortLinkModule } from './modules/shortLink/shortLink.module'
+import { ScanModule } from './modules/scan/scan.module'
 
 @Module({
     imports: [
