@@ -1,0 +1,32 @@
+{
+    "workbench.colorTheme": "Default Dark+",
+    "remote.SSH.remotePlatform": {
+        "*.gitpod.io": "linux"
+    },
+    "restoreTerminals.terminals": [
+        {
+            "splitTerminals": [
+                {
+                "name": "server:test",
+                "commands": ["git pull", "cd server", "npm i", "npm run test:watc"]
+                },
+              {
+                "name": "server",
+                "commands": ["cd server", "npm run start:dev"]
+              },
+            ]
+        },
+        {
+            "splitTerminals": [
+                {
+                    "name": "client:test",
+                    "commands": ["cd client", "npm i", "npm run test:watch"]
+                  },
+                {
+                    "name": "client",
+                    "commands": ["cd client", "npm run dev"]
+                  },
+            ]
+        }
+    ]
+}
