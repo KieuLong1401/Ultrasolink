@@ -6,7 +6,7 @@ export const lato = Lato({
     weight: ["100", "300", "400", "700", "900"]
 })
 
-export const cormorant_Garamond = Cormorant_Garamond({
+export const cormorantGaramond = Cormorant_Garamond({
     subsets: ['latin'],
     style: 'normal',
     weight: ["300", "400", "700", "500", "600"]

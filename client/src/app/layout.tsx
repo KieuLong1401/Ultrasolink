@@ -1,5 +1,9 @@
+import './global.css'
+
 import type { Metadata } from "next";
 import { lato } from "../utils/fonts";
+import { DesktopHeader } from "@/components/Molecules/DesktopHeader/DesktopHeader";
+import { Button } from '@/components/Atoms/Button/Button';
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -13,7 +17,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={lato.className}>{children}</body>
+      <body className={lato.className}>
+        <DesktopHeader/>
+        {children}
+      </body>
     </html>
   );
 }
