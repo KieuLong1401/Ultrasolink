@@ -1,0 +1,26 @@
+.header {
+    background-color: var(--background);
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 24px;
+}
+.navbar {
+    display: flex;
+    align-items: center;
+    column-gap: 40px;
+}
+.logo {
+    display: flex;
+    align-items: center;
+    column-gap: 16px;
+}
+.brandName {
+    color: var(--primary);
+    font-size: 24px;
+}
+.loginBtn {
+    height: 32px;
+    padding-inline: 24px;
+}

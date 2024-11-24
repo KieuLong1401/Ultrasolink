@@ -1,0 +1,22 @@
+.button {
+    cursor: pointer;
+    box-shadow: none;
+    box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-blur) var(--shadow-spread) var(--shadow);
+}
+.button:hover {
+    box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-blur) var(--shadow-spread) var(--shadow) inset;
+}
+.round {
+    border-radius: 90px;
+}
+.square {
+    border-radius: 4px;
+}
+.primary {
+    background-color: var(--primary);
+    color: black;
+}
+.background{
+    background-color: var(--background);
+    color: var(--text)
+}
