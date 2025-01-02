@@ -8,7 +8,7 @@
             "splitTerminals": [
                 {
                 "name": "server:test",
-                "commands": ["git pull", "cd server", "npm i", "npm run test:watc"]
+                "commands": ["git pull", "cd server", "npm i", "npm run test:watch"]
                 },
               {
                 "name": "server",

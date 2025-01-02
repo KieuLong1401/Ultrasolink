@@ -1,22 +1,28 @@
 :root {
-    --background: #2C3539;
-    --primary: #40E0D0;
-    --text: #F5F5DC;
+    --background: #2c3539;
+    --primary: #40e0d0;
+    --text: #f5f5dc;
     --shadow: rgba(0, 0, 0, 0.5);
     --shadow-spread: 2px;
     --shadow-blur: 4px;
     --shadow-x: 0px;
     --shadow-y: 0px;
 }
-*, *::after, *::before {
+*,
+*::after,
+*::before {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
     border: 0;
 }
-ol, ul {
+ol,
+ul {
     list-style: none;
 }
 a {
     text-decoration: none;
+}
+body {
+    background-color: var(--background);
 }

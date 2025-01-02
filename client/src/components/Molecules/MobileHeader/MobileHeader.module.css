@@ -13,15 +13,6 @@
     align-items: center;
     column-gap: 40px;
 }
-.logo {
-    display: flex;
-    align-items: center;
-    column-gap: 16px;
-}
-.brandName {
-    color: var(--primary);
-    font-size: 24px;
-}
 .loginBtn {
     height: 32px;
     padding-inline: 24px;

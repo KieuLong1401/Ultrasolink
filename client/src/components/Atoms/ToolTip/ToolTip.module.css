@@ -1,0 +1,27 @@
+.container {
+    position: relative;
+}
+.container:hover .tooltip {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.tooltip {
+    position: absolute;
+    top: 20px;
+    display: none;
+    background-color: var(--background);
+    padding: 5px;
+    padding-inline: 10px;
+    border-radius: 4px;
+    max-width: 150px;
+    width: max-content;
+    height: auto;
+    box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-blur)
+        var(--shadow-spread) var(--shadow);
+}
+.text {
+    color: var(--text);
+    font-size: 12px;
+}

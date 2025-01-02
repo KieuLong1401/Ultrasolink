@@ -13,6 +13,7 @@ import { ScanModule } from './modules/scan/scan.module'
             isGlobal: true,
             load: [config],
         }),
+
         MongooseModule.forRootAsync({
             imports: [ConfigModule],
             useFactory: async (configService: ConfigService) => ({
@@ -24,6 +25,7 @@ import { ScanModule } from './modules/scan/scan.module'
             }),
             inject: [ConfigService],
         }),
+
         UserModule,
         QrCodeModule,
         ShortLinkModule,
