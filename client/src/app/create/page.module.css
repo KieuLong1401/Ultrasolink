@@ -1,0 +1,13 @@
+.container {
+    padding-inline: 24px;
+    padding-top: 16px;
+}
+.breadCrumb {
+    margin-bottom: 36px;
+}
+.header {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-bottom: 64px;
+}

@@ -6,6 +6,7 @@
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+    z-index: 1;
 }
 .tooltip {
     position: absolute;

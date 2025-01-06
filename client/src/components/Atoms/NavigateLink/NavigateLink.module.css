@@ -2,6 +2,8 @@
     color: var(--text);
     font-size: 20px;
     font-weight: 600;
+    line-height: 115%;
+    word-spacing: 0.58px;
 }
 .link:hover {
     text-decoration: underline;
