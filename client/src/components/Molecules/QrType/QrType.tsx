@@ -2,7 +2,7 @@ import ToolTip from '@/components/Atoms/ToolTip/ToolTip'
 import styles from './QrType.module.css'
 
 import { FC, ReactNode } from 'react'
-import InfoIcon from '../../../../public/icons/info.svg'
+import InfoIcon from '../../../../public/icons/infoIcon.svg'
 import Link from 'next/link'
 
 interface IQrTypeProps {

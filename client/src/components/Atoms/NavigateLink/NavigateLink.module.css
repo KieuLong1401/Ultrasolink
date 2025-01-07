@@ -1,5 +1,4 @@
 .link {
-    color: var(--text);
     font-size: 20px;
     font-weight: 600;
     line-height: 115%;
@@ -7,4 +6,16 @@
 }
 .link:hover {
     text-decoration: underline;
+}
+.textColor {
+    color: var(--text);
+}
+.primaryColor {
+    color: var(--primary);
+}
+.disabled {
+    cursor: default;
+}
+.disabled:hover {
+    text-decoration: none;
 }
