@@ -1,25 +1,37 @@
-import { cn } from '@/utils/cn';
+import { cn } from '@/utils/cn'
 import styles from './Button.module.css'
 
-import React, { FC } from "react";
+import React, { FC } from 'react'
 interface IButtonProps {
     children: React.ReactNode
     className?: string
     shape: 'round' | 'square'
     color: 'primary' | 'background' | 'reverse'
+    onClick?: () => void
 }
 
-export const Button: FC<IButtonProps> = ({ children, className, shape, color }) => {
+export const Button: FC<IButtonProps> = ({
+    children,
+    className,
+    shape,
+    color,
+    onClick,
+}) => {
     return (
-        <button className={
-                cn(
-                    styles.button,
-                    className ? className : '',
-                    shape == 'round' ? styles.round : styles.square, 
-                    color == 'primary' ? styles.primary : color == 'background' ? styles.background : styles.reverse
-                )
-            }>
+        <button
+            className={cn(
+                styles.button,
+                className ? className : '',
+                shape == 'round' ? styles.round : styles.square,
+                color == 'primary'
+                    ? styles.primary
+                    : color == 'background'
+                    ? styles.background
+                    : styles.reverse
+            )}
+            onClick={onClick}
+        >
             {children}
         </button>
-    );
+    )
 }

@@ -2,6 +2,7 @@
 
 import styles from './BreadCrumbs.module.css'
 import { NavigateLink } from '@/components/Atoms/NavigateLink/NavigateLink'
+import capitalizeFirstLetter from '@/utils/capitalizeFirstLetter'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
@@ -16,7 +17,7 @@ const BreadCrumbs = () => {
     }, [pathname])
 
     return (
-        <span className={styles.container}>
+        <div className={styles.container}>
             <NavigateLink href="/" color="primary">
                 Home
             </NavigateLink>
@@ -26,22 +27,24 @@ const BreadCrumbs = () => {
                 const href = '/' + paths.slice(0, index + 1).join('/')
 
                 return (
-                    <NavigateLink
-                        href={href}
-                        color={isLast ? 'text' : 'primary'}
-                        key={href}
-                        disabled={isLast}
-                    >
-                        {path}
+                    <>
+                        <NavigateLink
+                            href={href}
+                            color={isLast ? 'text' : 'primary'}
+                            key={href}
+                            disabled={isLast}
+                        >
+                            {capitalizeFirstLetter(path)}
+                        </NavigateLink>
                         {isLast ? (
                             ''
                         ) : (
                             <span className={styles.slash}> / </span>
                         )}
-                    </NavigateLink>
+                    </>
                 )
             })}
-        </span>
+        </div>
     )
 }
 

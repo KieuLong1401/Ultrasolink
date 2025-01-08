@@ -1,5 +1,7 @@
 .container {
     position: relative;
+    width: fit-content;
+    height: fit-content;
 }
 .container:hover .tooltip {
     display: flex;
