@@ -17,7 +17,7 @@
     box-shadow: none;
 }
 .info {
-    position: absolute;
+    position: absolute !important;
     top: 12px;
     right: 12px;
 }

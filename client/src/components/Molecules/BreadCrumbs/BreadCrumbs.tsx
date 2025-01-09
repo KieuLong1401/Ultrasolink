@@ -27,11 +27,10 @@ const BreadCrumbs = () => {
                 const href = '/' + paths.slice(0, index + 1).join('/')
 
                 return (
-                    <>
+                    <span key={href}>
                         <NavigateLink
                             href={href}
                             color={isLast ? 'text' : 'primary'}
-                            key={href}
                             disabled={isLast}
                         >
                             {capitalizeFirstLetter(path)}
@@ -41,7 +40,7 @@ const BreadCrumbs = () => {
                         ) : (
                             <span className={styles.slash}> / </span>
                         )}
-                    </>
+                    </span>
                 )
             })}
         </div>

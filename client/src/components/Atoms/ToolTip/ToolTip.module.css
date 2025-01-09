@@ -8,7 +8,6 @@
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    z-index: 1;
 }
 .tooltip {
     position: absolute;
@@ -23,6 +22,7 @@
     height: auto;
     box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-blur)
         var(--shadow-spread) var(--shadow);
+    z-index: 1;
 }
 .text {
     color: var(--text);
