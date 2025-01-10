@@ -10,6 +10,8 @@ interface InputProps {
     type: string
     placeholder: string
     value: string
+    name: string
+    error?: string
 }
 
 const Input: FC<InputProps> = ({
@@ -18,6 +20,8 @@ const Input: FC<InputProps> = ({
     type,
     placeholder,
     value,
+    name,
+    error,
 }) => {
     return (
         <div className={styles.container}>
@@ -27,10 +31,12 @@ const Input: FC<InputProps> = ({
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
                 className={styles.input}
+                name={name}
             />
             <ToolTip text={description} classname={styles.info}>
                 <InfoIcon />
             </ToolTip>
+            {error && <span className={styles.errorMessage}>{error}</span>}
         </div>
     )
 }

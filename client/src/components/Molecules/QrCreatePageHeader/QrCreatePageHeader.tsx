@@ -2,7 +2,7 @@
 
 import styles from './QrCreatePageHeader.module.css'
 
-import BreadCrumbs from '../BreadCrumbs/BreadCrumbs'
+import BreadCrumbs from '../../Atoms/BreadCrumbs/BreadCrumbs'
 import { Button } from '@/components/Atoms/Button/Button'
 
 import BackIcon from '../../../../public/icons/backIcon.svg'

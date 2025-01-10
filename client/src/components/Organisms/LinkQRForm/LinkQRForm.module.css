@@ -1,0 +1,13 @@
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+}
+.submitButton {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 111%;
+    word-spacing: 0.28px;
+}

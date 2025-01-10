@@ -2,21 +2,26 @@ import { cn } from '@/utils/cn'
 import styles from './Button.module.css'
 
 import React, { FC } from 'react'
+import { useFormStatus } from 'react-dom'
 interface IButtonProps {
     children: React.ReactNode
-    className?: string
     shape: 'round' | 'square'
     color: 'primary' | 'background' | 'reverse'
     onClick?: () => void
+    className?: string
+    type?: 'button' | 'submit' | 'reset'
 }
 
 export const Button: FC<IButtonProps> = ({
     children,
-    className,
     shape,
     color,
     onClick,
+    className,
+    type = 'button',
 }) => {
+    const { pending } = useFormStatus()
+
     return (
         <button
             className={cn(
@@ -29,9 +34,11 @@ export const Button: FC<IButtonProps> = ({
                     ? styles.background
                     : styles.reverse
             )}
+            disabled={pending}
             onClick={onClick}
+            type={type}
         >
-            {children}
+            {pending ? <span>Submitting</span> : children}
         </button>
     )
 }
