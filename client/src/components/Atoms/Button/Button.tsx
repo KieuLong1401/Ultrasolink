@@ -1,8 +1,11 @@
+'use client'
+
 import { cn } from '@/utils/cn'
 import styles from './Button.module.css'
 
 import React, { FC } from 'react'
 import { useFormStatus } from 'react-dom'
+
 interface IButtonProps {
     children: React.ReactNode
     shape: 'round' | 'square'

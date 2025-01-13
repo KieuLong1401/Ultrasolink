@@ -7,6 +7,7 @@
     --shadow-blur: 4px;
     --shadow-x: 0px;
     --shadow-y: 0px;
+    --error: #ff6b6b; /* New error color */
 }
 *,
 *::after,
@@ -25,4 +26,8 @@ a {
 }
 body {
     background-color: var(--background);
+}
+.container {
+    padding-inline: 24px;
+    padding-top: 16px;
 }

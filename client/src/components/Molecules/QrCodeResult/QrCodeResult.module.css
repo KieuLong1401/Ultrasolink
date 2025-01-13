@@ -1,0 +1,18 @@
+.container {
+    box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-blur)
+        var(--shadow-spread) var(--shadow);
+    max-width: 480px;
+    width: 100%;
+    margin: 0 auto;
+}
+.roundButtonContainer {
+    display: flex;
+    justify-content: space-between;
+}
+.roundButton {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

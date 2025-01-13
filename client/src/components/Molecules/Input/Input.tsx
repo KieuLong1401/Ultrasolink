@@ -3,6 +3,8 @@ import styles from './Input.module.css'
 import ToolTip from '@/components/Atoms/ToolTip/ToolTip'
 
 import InfoIcon from '../../../../public/icons/infoIcon.svg'
+import { cn } from '@/utils/cn'
+import { cormorantGaramond } from '@/utils/fonts'
 
 interface InputProps {
     description: string
@@ -23,20 +25,28 @@ const Input: FC<InputProps> = ({
     name,
     error,
 }) => {
+    console.log(error)
+
     return (
         <div className={styles.container}>
-            <input
-                type={type}
-                placeholder={placeholder}
-                value={value}
-                onChange={(e) => setValue(e.target.value)}
-                className={styles.input}
-                name={name}
-            />
-            <ToolTip text={description} classname={styles.info}>
-                <InfoIcon />
-            </ToolTip>
-            {error && <span className={styles.errorMessage}>{error}</span>}
+            <div className={styles.inputContainer}>
+                <input
+                    type={type}
+                    placeholder={placeholder}
+                    value={value}
+                    onChange={(e) => setValue(e.target.value)}
+                    className={cn(
+                        styles.input,
+                        cormorantGaramond.className,
+                        error ? styles.error : ''
+                    )}
+                    name={name}
+                />
+                <ToolTip text={description} classname={styles.info}>
+                    <InfoIcon />
+                </ToolTip>
+            </div>
+            {error && <span className={styles.errorMessage}>{error[0]}</span>}
         </div>
     )
 }

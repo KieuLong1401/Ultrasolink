@@ -18,7 +18,7 @@ export default function RootLayout({
         <html lang="en">
             <body className={lato.className}>
                 <Header />
-                {children}
+                <div className="container">{children}</div>
             </body>
         </html>
     )
