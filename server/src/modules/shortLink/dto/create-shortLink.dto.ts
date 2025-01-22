@@ -1,4 +1,7 @@
 export class CreateShortLinkDto {
-    id: string
     url: string
+    folder: string
+    name: string
+    type: string
+    user: string
 }

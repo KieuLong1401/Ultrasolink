@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { HydratedDocument, Types } from 'mongoose'
-import { QrCode } from '../../qrCode/schemas/qrCode.schema'
+import { ShortLink } from '../../shortLink/schemas/shortLink.schema'
 
 export type UserDocument = HydratedDocument<User>
 
@@ -9,7 +9,7 @@ export enum plan {
     PRO,
 }
 
-@Schema({ timestamps: true })
+@Schema({ timestamps: true, id: false })
 export class User {
     @Prop({
         unique: true,
@@ -24,8 +24,8 @@ export class User {
     })
     plan: plan
 
-    @Prop([{ type: Types.ObjectId, ref: (() => QrCode).name }])
-    QrCode: QrCode[]
+    @Prop([{ type: Types.ObjectId, ref: (() => ShortLink).name }])
+    ShortLink: ShortLink[]
 }
 
 export const UserSchema = SchemaFactory.createForClass(User)

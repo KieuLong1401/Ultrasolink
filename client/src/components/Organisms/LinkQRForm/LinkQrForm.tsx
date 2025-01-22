@@ -1,6 +1,6 @@
 'use client'
 
-import { createQrCode } from '@/app/actions/qrCodeActions'
+import { createQrCode } from '@/actions/qrCodeActions'
 import styles from './LinkQrForm.module.css'
 
 import { Button } from '@/components/Atoms/Button/Button'
@@ -8,7 +8,6 @@ import DropDown from '@/components/Molecules/DropDown/DropDown'
 import Input from '@/components/Molecules/Input/Input'
 import { cn } from '@/utils/cn'
 import { cormorantGaramond } from '@/utils/fonts'
-import { link } from 'fs'
 import { useState } from 'react'
 import { useFormState } from 'react-dom'
 

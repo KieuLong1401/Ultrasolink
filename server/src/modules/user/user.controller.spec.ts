@@ -3,6 +3,7 @@ import { UserController } from './user.controller'
 import { UserService } from './user.service'
 import { CreateUserDto } from './dto/create-user.dto'
 import { UpdateUserDto } from './dto/update-user.dto'
+import mongoose from 'mongoose'
 
 const mockUser = {
     _id: '66ce7c395b09800d5de0ab1e',
@@ -54,7 +55,9 @@ describe('UserController', () => {
         const id = '66ce7c395b09800d5de0ab1e'
         const deletedUser = await controller.remove(id)
         expect(deletedUser).toEqual(mockUser)
-        expect(service.remove).toHaveBeenCalledWith(id)
+        expect(service.remove).toHaveBeenCalledWith(
+            new mongoose.Types.ObjectId(id)
+        )
     })
     it('should update a user', async () => {
         const id = '66ce7c395b09800d5de0ab1e'
@@ -63,6 +66,9 @@ describe('UserController', () => {
             mockUser as UpdateUserDto
         )
         expect(updatedUser).toEqual(mockUser)
-        expect(service.update).toHaveBeenCalledWith(id, mockUser)
+        expect(service.update).toHaveBeenCalledWith(
+            new mongoose.Types.ObjectId(id),
+            mockUser
+        )
     })
 })

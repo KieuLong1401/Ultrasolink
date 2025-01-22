@@ -10,3 +10,16 @@ Content-Type: application/json
     "email": "kieulong1401@gmail.com",
     "password": "knl140107"
 }
+
+###
+
+POST http://localhost:3001/short-link
+Content-Type: application/json
+
+{
+    "url": "https://www.google.com",
+    "folder": "Default",
+    "name": "name",
+    "type": "LINK",
+    "user": "66ce7c395b09800d5de0ab1e",
+}

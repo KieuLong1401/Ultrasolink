@@ -13,6 +13,7 @@ import {
 import { ShortLinkService } from './shortLink.service'
 import { CreateShortLinkDto } from './dto/create-shortLink.dto'
 import { UpdateShortLinkDto } from './dto/update-shortLink.dto'
+import mongoose from 'mongoose'
 
 @Controller('short-link')
 export class ShortLinkController {
@@ -23,14 +24,16 @@ export class ShortLinkController {
         try {
             return this.shortLinkService.create(createShortLinkDto)
         } catch (error) {
-            throw new BadRequestException('fail to create short link')
+            throw new BadRequestException(error.message)
         }
     }
 
     @Get(':id')
     findOne(@Param('id') id: string) {
         try {
-            const shortLink = this.shortLinkService.findOne(id)
+            const shortLink = this.shortLinkService.findOne(
+                new mongoose.Types.ObjectId(id)
+            )
             if (!shortLink) throw new NotFoundException('short link not found')
             return shortLink
         } catch (error) {
@@ -47,7 +50,7 @@ export class ShortLinkController {
     ) {
         try {
             const updatedShortLink = this.shortLinkService.update(
-                id,
+                new mongoose.Types.ObjectId(id),
                 updateShortLinkDto
             )
             if (!updatedShortLink)
@@ -63,7 +66,9 @@ export class ShortLinkController {
     @Delete(':id')
     remove(@Param('id') id: string) {
         try {
-            const deletedShortLink = this.shortLinkService.remove(id)
+            const deletedShortLink = this.shortLinkService.remove(
+                new mongoose.Types.ObjectId(id)
+            )
             if (!deletedShortLink)
                 throw new NotFoundException('short link not found')
             return deletedShortLink

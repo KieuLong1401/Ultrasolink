@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing'
 import { UserService } from './user.service'
 import { plan, User } from './schemas/user.schema'
 import { getModelToken } from '@nestjs/mongoose'
-import { Model } from 'mongoose'
+import mongoose, { Model } from 'mongoose'
 import { CreateUserDto } from './dto/create-user.dto'
 import { UpdateUserDto } from './dto/update-user.dto'
 
@@ -61,13 +61,13 @@ describe('UserService', () => {
     })
 
     it('should delete a user', async () => {
-        const id = '66ce7c395b09800d5de0ab1e'
+        const id = new mongoose.Types.ObjectId('66ce7c395b09800d5de0ab1e')
         const removedUser = await service.remove(id)
         expect(removedUser).toEqual(mockUser)
         expect(model.findByIdAndDelete).toHaveBeenCalledWith(id)
     })
     it('should update an user', async () => {
-        const id = '66ce7c395b09800d5de0ab1e'
+        const id = new mongoose.Types.ObjectId('66ce7c395b09800d5de0ab1e')
         const updateUserDto: UpdateUserDto = {
             email: 'update@gmail.com',
             password: 'update',

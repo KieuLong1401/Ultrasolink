@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common'
 import { CreateScanDto } from './dto/create-scan.dto'
 import { InjectModel } from '@nestjs/mongoose'
 import { Scan } from './schemas/scan.schema'
-import { Model } from 'mongoose'
+import mongoose, { Model } from 'mongoose'
 
 @Injectable()
 export class ScanService {
@@ -12,7 +12,7 @@ export class ScanService {
         return this.ScanModel.create(createScanDto)
     }
 
-    findByQrCode(qrCodeId: string): Promise<Scan[]> {
+    findByQrCode(qrCodeId: mongoose.Types.ObjectId): Promise<Scan[]> {
         return this.ScanModel.find({ qrCode: qrCodeId }).exec()
     }
 }

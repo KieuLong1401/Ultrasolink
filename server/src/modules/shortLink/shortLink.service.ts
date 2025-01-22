@@ -3,7 +3,8 @@ import { CreateShortLinkDto } from './dto/create-shortLink.dto'
 import { UpdateShortLinkDto } from './dto/update-shortLink.dto'
 import { InjectModel } from '@nestjs/mongoose'
 import { ShortLink } from './schemas/shortLink.schema'
-import { Model } from 'mongoose'
+import mongoose, { Model, ObjectId } from 'mongoose'
+import { nanoid } from 'nanoid'
 
 @Injectable()
 export class ShortLinkService {
@@ -11,22 +12,32 @@ export class ShortLinkService {
         @InjectModel(ShortLink.name) private ShortLinkModel: Model<ShortLink>
     ) {}
 
-    create(createShortLinkDto: CreateShortLinkDto): Promise<ShortLink> {
-        return this.ShortLinkModel.create(createShortLinkDto)
+    async create(createShortLinkDto: CreateShortLinkDto): Promise<ShortLink> {
+        let shortenLink: string
+
+        shortenLink = nanoid(5)
+
+        return this.ShortLinkModel.create({
+            ...createShortLinkDto,
+            shortenLink,
+        })
     }
 
-    findOne(id: string) {
-        return this.ShortLinkModel.findById(id).exec()
+    async findOne(id: mongoose.Types.ObjectId): Promise<ShortLink> {
+        return await this.ShortLinkModel.findById(id).exec()
     }
 
-    update(id: string, updateShortLinkDto: UpdateShortLinkDto) {
-        return this.ShortLinkModel.findByIdAndUpdate(
+    async update(
+        id: mongoose.Types.ObjectId,
+        updateShortLinkDto: UpdateShortLinkDto
+    ) {
+        return await this.ShortLinkModel.findByIdAndUpdate(
             id,
             updateShortLinkDto
         ).exec()
     }
 
-    remove(id: string) {
-        return this.ShortLinkModel.findByIdAndDelete(id).exec()
+    async remove(id: mongoose.Types.ObjectId) {
+        return await this.ShortLinkModel.findByIdAndDelete(id).exec()
     }
 }

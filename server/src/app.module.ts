@@ -3,7 +3,6 @@ import { ConfigModule, ConfigService } from '@nestjs/config'
 import { config } from './config/config'
 import { MongooseModule } from '@nestjs/mongoose'
 import { UserModule } from './modules/user/user.module'
-import { QrCodeModule } from './modules/qrCode/qrCode.module'
 import { ShortLinkModule } from './modules/shortLink/shortLink.module'
 import { ScanModule } from './modules/scan/scan.module'
 
@@ -27,7 +26,6 @@ import { ScanModule } from './modules/scan/scan.module'
         }),
 
         UserModule,
-        QrCodeModule,
         ShortLinkModule,
         ScanModule,
     ],

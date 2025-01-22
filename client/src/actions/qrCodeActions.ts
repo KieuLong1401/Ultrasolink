@@ -7,7 +7,7 @@ import { redirect } from 'next/navigation'
 const folders = ['Default', 'Home']
 
 const createQrCodeSchema = z.object({
-    folder: z.string().refine((folder) => folders.includes(folder), {
+    folder: z.string().refine((folder: string) => folders.includes(folder), {
         message: 'Invalid folder',
     }),
     link: z
