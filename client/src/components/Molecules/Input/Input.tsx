@@ -13,7 +13,7 @@ interface InputProps {
     placeholder: string
     value: string
     name: string
-    error?: string
+    error?: string[]
 }
 
 const Input: FC<InputProps> = ({
@@ -40,13 +40,18 @@ const Input: FC<InputProps> = ({
                         cormorantGaramond.className,
                         error ? styles.error : ''
                     )}
+                    autoComplete="off"
                     name={name}
                 />
                 <ToolTip text={description} classname={styles.info}>
                     <InfoIcon />
                 </ToolTip>
             </div>
-            {error && <span className={styles.errorMessage}>{error[0]}</span>}
+            {error && (
+                <span className={styles.errorMessage}>
+                    {Array.isArray(error) ? error[0] : error}
+                </span>
+            )}
         </div>
     )
 }
