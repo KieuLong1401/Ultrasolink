@@ -1,6 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { Types } from 'mongoose'
-import { Scan } from '../../scan/schemas/scan.schema'
 import { User } from '../../user/schemas/user.schema'
 
 export enum type {
@@ -32,9 +31,6 @@ export class ShortLink {
 
     @Prop({ type: Types.ObjectId, ref: (() => User).name })
     user: User
-
-    @Prop([{ type: Types.ObjectId, ref: (() => Scan).name }])
-    Scan: Scan[]
 }
 
 export const ShortLinkSchema = SchemaFactory.createForClass(ShortLink)

@@ -1,6 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { HydratedDocument, Types } from 'mongoose'
-import { ShortLink } from '../../shortLink/schemas/shortLink.schema'
 
 export type UserDocument = HydratedDocument<User>
 
@@ -23,9 +22,6 @@ export class User {
         default: plan.FREE,
     })
     plan: plan
-
-    @Prop([{ type: Types.ObjectId, ref: (() => ShortLink).name }])
-    ShortLink: ShortLink[]
 }
 
 export const UserSchema = SchemaFactory.createForClass(User)
