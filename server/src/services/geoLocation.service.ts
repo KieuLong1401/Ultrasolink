@@ -23,7 +23,7 @@ export class GeoLocationService {
                     HttpStatus.BAD_REQUEST
                 )
             }
-        } catch (error) {
+        } catch (error: any) {
             console.error('Error fetching geolocation:', error.message)
             throw new HttpException(
                 'Internal Server Error',
