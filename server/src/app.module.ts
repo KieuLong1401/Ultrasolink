@@ -5,6 +5,10 @@ import { MongooseModule } from '@nestjs/mongoose'
 import { UserModule } from './modules/user/user.module'
 import { ShortLinkModule } from './modules/shortLink/shortLink.module'
 import { ScanModule } from './modules/scan/scan.module'
+import { AuthModule } from './modules/auth/auth.module'
+import { APP_GUARD } from '@nestjs/core'
+import { JwtGuard } from './guards/jwt.guard'
+import { JwtStrategy } from './modules/auth/jwt.strategy'
 
 @Module({
     imports: [
@@ -28,8 +32,15 @@ import { ScanModule } from './modules/scan/scan.module'
         UserModule,
         ShortLinkModule,
         ScanModule,
+        AuthModule,
     ],
     controllers: [],
-    providers: [],
+    providers: [
+        {
+            provide: APP_GUARD,
+            useClass: JwtGuard,
+        },
+        JwtStrategy,
+    ],
 })
 export class AppModule {}

@@ -5,7 +5,7 @@ import { Logger } from '@nestjs/common'
 import { AllExceptionsFilter } from './http-exception/http-exception.filter'
 
 async function bootstrap() {
-    const app = await NestFactory.create(AppModule)
+    const app = await NestFactory.create(AppModule, { abortOnError: false })
     app.useGlobalFilters(new AllExceptionsFilter())
 
     const configService = app.get(ConfigService)
