@@ -1,6 +1,6 @@
 import styles from './page.module.css'
 
-import { Button } from '@/components/Atoms/Button/Button'
+import Button from '@/components/Atoms/Button/Button'
 import QrType from '@/components/Molecules/QrType/QrType'
 import LinkIcon from '../../../public/icons/linkIcon.svg'
 import BackIcon from '../../../public/icons/backIcon.svg'

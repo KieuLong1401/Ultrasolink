@@ -1,9 +1,8 @@
 import axios from 'axios'
 
 const axiosInstance = axios.create({
-    baseURL: 'https://some-domain.com/api/',
+    baseURL: 'http://localhost:3001',
     timeout: 5000,
-    headers: { 'X-Custom-Header': 'foobar' },
 })
 
 // axiosInstance.interceptors.request.use(
