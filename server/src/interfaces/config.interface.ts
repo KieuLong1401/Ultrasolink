@@ -7,4 +7,8 @@ export interface ConfigProps {
     mongodb: {
         database: MongodbConfigProps
     }
+    jwt: {
+        secret: string
+        access_token_validity_duration_in_sec: string
+    }
 }

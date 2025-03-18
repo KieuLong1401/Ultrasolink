@@ -9,4 +9,9 @@ export const config = (): ConfigProps => ({
                 'mongodb://localhost:27017',
         },
     },
+    jwt: {
+        secret: process.env.JWT_SECRET || 'defaultSecret',
+        access_token_validity_duration_in_sec:
+            process.env.ACCESS_TOKEN_VALIDITY_DURATION_IN_SEC,
+    },
 })
