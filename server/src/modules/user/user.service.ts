@@ -13,6 +13,10 @@ export class UserService {
         return this.UserModel.create(createUserDto)
     }
 
+    async findByEmail(email: string): Promise<User> {
+        return this.UserModel.findOne({ email }).exec()
+    }
+
     async update(
         id: mongoose.Types.ObjectId,
         updateUserDto: UpdateUserDto

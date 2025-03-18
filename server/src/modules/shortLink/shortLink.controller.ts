@@ -23,7 +23,7 @@ export class ShortLinkController {
     create(@Body() createShortLinkDto: CreateShortLinkDto) {
         try {
             return this.shortLinkService.create(createShortLinkDto)
-        } catch (error) {
+        } catch (error: any) {
             throw new BadRequestException(error.message)
         }
     }
