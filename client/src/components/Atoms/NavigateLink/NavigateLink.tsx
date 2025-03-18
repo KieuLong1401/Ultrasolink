@@ -11,7 +11,7 @@ interface INavigateLinkProps {
     disabled?: boolean
 }
 
-export const NavigateLink: FC<INavigateLinkProps> = ({
+const NavigateLink: FC<INavigateLinkProps> = ({
     children,
     href,
     color = 'text',
@@ -31,3 +31,5 @@ export const NavigateLink: FC<INavigateLinkProps> = ({
         </Link>
     )
 }
+
+export default NavigateLink

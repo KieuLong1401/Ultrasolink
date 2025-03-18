@@ -1,7 +1,7 @@
 'use client'
 
 import styles from './BreadCrumbs.module.css'
-import { NavigateLink } from '@/components/Atoms/NavigateLink/NavigateLink'
+import NavigateLink from '@/components/Atoms/NavigateLink/NavigateLink'
 import capitalizeFirstLetter from '@/utils/capitalizeFirstLetter'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'

@@ -25,8 +25,6 @@ const Input: FC<InputProps> = ({
     name,
     error,
 }) => {
-    console.log(error)
-
     return (
         <div className={styles.container}>
             <div className={styles.inputContainer}>

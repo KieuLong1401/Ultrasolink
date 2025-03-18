@@ -1,7 +1,7 @@
 import styles from './QrCodeResult.module.css'
 
 import { FC } from 'react'
-import { Button } from '@/components/Atoms/Button/Button'
+import Button from '@/components/Atoms/Button/Button'
 import CodeIcon from '../../../../public/icons/codeIcon.svg'
 import ShareIcon from '../../../../public/icons/shareIcon.svg'
 import QrCode from '@/components/Atoms/QrCode/QrCode'

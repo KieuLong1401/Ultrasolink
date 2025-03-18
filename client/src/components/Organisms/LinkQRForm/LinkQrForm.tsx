@@ -1,9 +1,9 @@
 'use client'
 
-import { createQrCode } from '@/actions/qrCodeActions'
 import styles from './LinkQrForm.module.css'
 
-import { Button } from '@/components/Atoms/Button/Button'
+import { createQrCode } from '@/actions/qrCodeActions'
+import Button from '@/components/Atoms/Button/Button'
 import DropDown from '@/components/Molecules/DropDown/DropDown'
 import Input from '@/components/Molecules/Input/Input'
 import { cn } from '@/utils/cn'
@@ -12,59 +12,62 @@ import { useState } from 'react'
 import { useFormState } from 'react-dom'
 
 const initialState = {
-    success: '',
     errors: {
-        link: '',
-        name: '',
+        folder: undefined,
+        link: undefined,
+        name: undefined,
     },
+    success: undefined,
+    data: undefined,
 }
 
-const LinkQRForm: React.FC = () => {
-    const [folderDropDownValue, setFolderDropDownValue] = useState('default')
-    const [linkInputValue, setLinkInputValue] = useState('')
-    const [nameInputValue, setNameInputValue] = useState('')
+export default function ServerForm() {
+    const [folder, setFolder] = useState('')
+    const [link, setLink] = useState('')
+    const [name, setName] = useState('')
 
     const [state, formAction] = useFormState(createQrCode, initialState)
 
     return (
-        <form className={styles.formContainer} action={formAction}>
+        <form action={formAction} className={styles.formContainer}>
             <DropDown
-                options={[
-                    { value: 'Default', label: 'Default' },
-                    { value: 'Home', label: 'Home' },
-                ]}
-                setDropDownValue={setFolderDropDownValue}
                 name="folder"
-                value={folderDropDownValue}
+                value={folder}
+                setDropDownValue={setFolder}
+                //
+                options={[
+                    { value: 'folder1', label: 'Folder 1' },
+                    { value: 'folder2', label: 'Folder 2' },
+                    { value: 'folder3', label: 'Folder 3' },
+                ]}
             />
             <Input
-                description="URL of your link"
-                setValue={setLinkInputValue}
-                type="text"
+                description="Link to be shortened"
                 placeholder="Link"
-                value={linkInputValue}
+                type="text"
                 name="link"
-                error={state.errors.link}
+                value={link}
+                setValue={setLink}
+                error={state?.errors?.link}
             />
             <Input
-                description="Name the Qr code you are creating"
-                setValue={setNameInputValue}
-                type="text"
+                description="Name of the link"
                 placeholder="Name"
-                value={nameInputValue}
+                type="text"
                 name="name"
-                error={state.errors.name}
+                value={name}
+                setValue={setName}
+                error={state?.errors?.name}
             />
+
             <Button
                 shape="square"
                 color="primary"
                 type="submit"
                 className={cn(cormorantGaramond.className, styles.submitButton)}
             >
-                Generate QR Code
+                Submit
             </Button>
         </form>
     )
 }
-
-export default LinkQRForm

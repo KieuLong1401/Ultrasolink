@@ -2,13 +2,14 @@
 
 import styles from './Header.module.css'
 
-import { FC } from 'react'
 import Logo from '../../../../public/logo.svg'
 import Link from 'next/link'
-import { NavigateLink } from '@/components/Atoms/NavigateLink/NavigateLink'
-import { Button } from '@/components/Atoms/Button/Button'
+import NavigateLink from '@/components/Atoms/NavigateLink/NavigateLink'
+import Button from '@/components/Atoms/Button/Button'
 import QrCodeIcon from '../../../../public/icons/qrCodeIcon.svg'
+
 import useDeviceType from '@/hooks/useDeviceType'
+import { FC } from 'react'
 
 const Header: FC = () => {
     const device = useDeviceType()

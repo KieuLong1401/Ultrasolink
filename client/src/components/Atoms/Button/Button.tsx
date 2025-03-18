@@ -15,7 +15,7 @@ interface IButtonProps {
     type?: 'button' | 'submit' | 'reset'
 }
 
-export const Button: FC<IButtonProps> = ({
+const Button: FC<IButtonProps> = ({
     children,
     shape,
     color,
@@ -45,3 +45,5 @@ export const Button: FC<IButtonProps> = ({
         </button>
     )
 }
+
+export default Button
