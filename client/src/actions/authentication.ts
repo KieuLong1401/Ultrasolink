@@ -1,9 +1,10 @@
 'use server'
 
 import axiosInstance from '@/utils/axiosInstance'
+import { cookies } from 'next/headers'
 import { z } from 'zod'
 
-const singUpSchema = z.object({
+const authSchema = z.object({
     email: z.string().email({ message: 'Invalid email' }),
     password: z
         .string()
@@ -12,51 +13,74 @@ const singUpSchema = z.object({
 })
 
 export const signUp = async (prevState: any, formData: FormData) => {
-    const email = formData.get('email') as string
-    const password = formData.get('password') as string
-
     const data = Object.fromEntries(formData)
-    const validatedData = singUpSchema.safeParse(data)
+    const validatedData = authSchema.safeParse(data)
 
     if (!validatedData.success) {
         return {
-            errors: validatedData.error.flatten().fieldErrors,
+            errors: {
+                ...validatedData.error.flatten().fieldErrors,
+                general: undefined,
+            },
         }
     }
 
     try {
-        const res = await axiosInstance.post('/user', { email, password })
+        const res = await axiosInstance.post('/auth/signup', validatedData.data)
 
         return {
             success: 'User created successfully',
             data: res.data,
         }
-    } catch (error) {
-        console.error(error)
+    } catch (error: any) {
+        return {
+            errors: {
+                email: undefined,
+                password: undefined,
+                general: error.response?.data?.message || 'Failed to sign up',
+            },
+        }
     }
 }
 
 export const login = async (prevState: any, formData: FormData) => {
-    const email = formData.get('email') as string
-    const password = formData.get('password') as string
-
     const data = Object.fromEntries(formData)
-    const validatedData = singUpSchema.safeParse(data)
+    const validatedData = authSchema.safeParse(data)
 
     if (!validatedData.success) {
         return {
-            errors: validatedData.error.flatten().fieldErrors,
+            errors: {
+                ...validatedData.error.flatten().fieldErrors,
+                general: undefined,
+            },
         }
     }
 
     try {
-        const res = await axiosInstance.post('/user', { email, password })
+        console.log(validatedData.data)
+        const res = await axiosInstance.post('/auth/login', validatedData.data)
+        const token = res.data.access_token
+
+        cookies().set('token', token, { httpOnly: true })
 
         return {
-            success: 'User created successfully',
+            success: 'Logged in successfully',
             data: res.data,
         }
-    } catch (error) {
-        console.error(error)
+    } catch (error: any) {
+        return {
+            errors: {
+                email: undefined,
+                password: undefined,
+                general: error.response?.data?.message || 'Invalid credentials',
+            },
+        }
+    }
+}
+
+export const logout = async () => {
+    cookies().delete('token')
+    return {
+        success: 'Logged out successfully',
     }
 }

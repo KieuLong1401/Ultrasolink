@@ -29,3 +29,6 @@
     line-height: 111%;
     word-spacing: 0.28px;
 }
+.errorMessage {
+    color: var(--error);
+}

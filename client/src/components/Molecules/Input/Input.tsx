@@ -8,20 +8,16 @@ import { cormorantGaramond } from '@/utils/fonts'
 
 interface InputProps {
     description: string
-    setValue: (value: string) => void
     type: string
     placeholder: string
-    value: string
     name: string
-    error?: string[]
+    error?: string[] | undefined
 }
 
 const Input: FC<InputProps> = ({
     description,
-    setValue,
     type,
     placeholder,
-    value,
     name,
     error,
 }) => {
@@ -31,8 +27,6 @@ const Input: FC<InputProps> = ({
                 <input
                     type={type}
                     placeholder={placeholder}
-                    value={value}
-                    onChange={(e) => setValue(e.target.value)}
                     className={cn(
                         styles.input,
                         cormorantGaramond.className,

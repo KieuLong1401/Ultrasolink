@@ -8,26 +8,33 @@ import Button from '@/components/Atoms/Button/Button'
 import NavigateLink from '@/components/Atoms/NavigateLink/NavigateLink'
 import RememberMeCheckBox from '@/components/Molecules/RememberMeCheckBox/RememberMeCheckBox'
 
-import { useState } from 'react'
+import { use, useEffect, useState } from 'react'
 import { useFormState } from 'react-dom'
 
 import { cn } from '@/utils/cn'
 import { login } from '@/actions/authentication'
+import { useRouter } from 'next/navigation'
 
 const initialState = {
     errors: {
         email: undefined,
         password: undefined,
+        general: undefined,
     },
     success: undefined,
-    data: undefined,
 }
 
 const LoginForm: React.FC = () => {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-
     const [state, formAction] = useFormState(login, initialState)
+    const router = useRouter()
+
+    useEffect(() => {
+        if (state?.success) {
+            router.push('/dashboard')
+        }
+
+        console.log(state)
+    }, [state])
 
     return (
         <>
@@ -46,22 +53,18 @@ const LoginForm: React.FC = () => {
             <form className={styles.formContainer} action={formAction}>
                 <Input
                     description="Email"
-                    setValue={setEmail}
                     type="text"
                     placeholder="Email"
-                    value={email}
                     name="email"
-                    error={state?.errors?.email}
+                    error={state.errors?.email}
                 />
                 <div>
                     <Input
                         description="Password"
-                        setValue={setPassword}
                         type="password"
                         placeholder="Password"
-                        value={password}
                         name="password"
-                        error={state?.errors?.password}
+                        error={state.errors?.password}
                     />
 
                     <div className={styles.rememberForgotPassword}>
@@ -72,7 +75,11 @@ const LoginForm: React.FC = () => {
                         </NavigateLink>
                     </div>
                 </div>
-
+                {state?.errors?.general && (
+                    <span className={styles.errorMessage}>
+                        {state.errors.general}
+                    </span>
+                )}
                 <Button
                     shape="square"
                     color="primary"
