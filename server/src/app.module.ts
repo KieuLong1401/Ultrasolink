@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common'
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { config } from './config/config'
 import { MongooseModule } from '@nestjs/mongoose'
@@ -6,6 +6,8 @@ import { UserModule } from './modules/user/user.module'
 import { ShortLinkModule } from './modules/shortLink/shortLink.module'
 import { ScanModule } from './modules/scan/scan.module'
 import { AuthModule } from './modules/auth/auth.module'
+import { AuthMiddleware } from './modules/auth/auth.middleware'
+import { JwtModule } from '@nestjs/jwt'
 import { APP_GUARD } from '@nestjs/core'
 import { JwtGuard } from './guards/jwt.guard'
 import { JwtStrategy } from './modules/auth/jwt.strategy'
@@ -28,7 +30,6 @@ import { JwtStrategy } from './modules/auth/jwt.strategy'
             }),
             inject: [ConfigService],
         }),
-
         UserModule,
         ShortLinkModule,
         ScanModule,

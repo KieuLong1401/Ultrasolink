@@ -12,6 +12,6 @@ export const config = (): ConfigProps => ({
     jwt: {
         secret: process.env.JWT_SECRET || 'defaultSecret',
         access_token_validity_duration_in_sec:
-            process.env.ACCESS_TOKEN_VALIDITY_DURATION_IN_SEC,
+            process.env.ACCESS_TOKEN_VALIDITY_DURATION_IN_SEC || '3600',
     },
 })
