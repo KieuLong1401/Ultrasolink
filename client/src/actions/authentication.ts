@@ -57,7 +57,6 @@ export const login = async (prevState: any, formData: FormData) => {
     }
 
     try {
-        console.log(validatedData.data)
         const res = await axiosInstance.post('/auth/login', validatedData.data)
         const token = res.data.access_token
 

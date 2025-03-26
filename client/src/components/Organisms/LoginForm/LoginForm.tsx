@@ -8,7 +8,7 @@ import Button from '@/components/Atoms/Button/Button'
 import NavigateLink from '@/components/Atoms/NavigateLink/NavigateLink'
 import RememberMeCheckBox from '@/components/Molecules/RememberMeCheckBox/RememberMeCheckBox'
 
-import { use, useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useFormState } from 'react-dom'
 
 import { cn } from '@/utils/cn'
@@ -32,8 +32,6 @@ const LoginForm: React.FC = () => {
         if (state?.success) {
             router.push('/dashboard')
         }
-
-        console.log(state)
     }, [state])
 
     return (
@@ -52,18 +50,16 @@ const LoginForm: React.FC = () => {
 
             <form className={styles.formContainer} action={formAction}>
                 <Input
-                    description="Email"
                     type="text"
                     placeholder="Email"
-                    name="email"
+                    name="login[email]"
                     error={state.errors?.email}
                 />
                 <div>
                     <Input
-                        description="Password"
                         type="password"
                         placeholder="Password"
-                        name="password"
+                        name="login[password]"
                         error={state.errors?.password}
                     />
 

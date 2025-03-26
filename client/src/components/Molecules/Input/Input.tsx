@@ -7,7 +7,7 @@ import { cn } from '@/utils/cn'
 import { cormorantGaramond } from '@/utils/fonts'
 
 interface InputProps {
-    description: string
+    description?: string
     type: string
     placeholder: string
     name: string
@@ -35,9 +35,11 @@ const Input: FC<InputProps> = ({
                     autoComplete="off"
                     name={name}
                 />
-                <ToolTip text={description} classname={styles.info}>
-                    <InfoIcon />
-                </ToolTip>
+                {description && (
+                    <ToolTip text={description} classname={styles.info}>
+                        <InfoIcon />
+                    </ToolTip>
+                )}
             </div>
             {error && (
                 <span className={styles.errorMessage}>
