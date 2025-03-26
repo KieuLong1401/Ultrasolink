@@ -1,0 +1,29 @@
+.login {
+    margin-bottom: 16px;
+    display: flex;
+    gap: 16px;
+}
+.login span {
+    font-size: 20px;
+    line-height: 111%;
+    word-spacing: 0.28px;
+    color: var(--text);
+    font-weight: bold;
+}
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+}
+.submitButton {
+    margin-top: 28px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 111%;
+    word-spacing: 0.28px;
+}
+.errorMessage {
+    color: var(--error);
+}
