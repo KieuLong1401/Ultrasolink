@@ -11,7 +11,7 @@ import { useEffect } from 'react'
 import { useFormState } from 'react-dom'
 
 import { cn } from '@/utils/cn'
-import { login } from '@/actions/authentication'
+import { login, signUp } from '@/actions/authentication'
 import { useRouter } from 'next/navigation'
 
 const initialState = {
@@ -24,7 +24,7 @@ const initialState = {
 }
 
 const SignupForm: React.FC = () => {
-    const [state, formAction] = useFormState(login, initialState)
+    const [state, formAction] = useFormState(signUp, initialState)
     const router = useRouter()
 
     useEffect(() => {

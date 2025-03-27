@@ -13,7 +13,13 @@ const authSchema = z.object({
 })
 
 export const signUp = async (prevState: any, formData: FormData) => {
-    const data = Object.fromEntries(formData)
+    var data = Object.fromEntries(formData)
+    data = {
+        ...data,
+        email: data['signup[email]'],
+        password: data['signup[password]'],
+    }
+    console.log(data)
     const validatedData = authSchema.safeParse(data)
 
     if (!validatedData.success) {
@@ -27,6 +33,9 @@ export const signUp = async (prevState: any, formData: FormData) => {
 
     try {
         const res = await axiosInstance.post('/auth/signup', validatedData.data)
+        const token = res.data.access_token
+
+        cookies().set('token', token, { httpOnly: true })
 
         return {
             success: 'User created successfully',
@@ -44,7 +53,12 @@ export const signUp = async (prevState: any, formData: FormData) => {
 }
 
 export const login = async (prevState: any, formData: FormData) => {
-    const data = Object.fromEntries(formData)
+    var data = Object.fromEntries(formData)
+    data = {
+        ...data,
+        email: data['login[email]'],
+        password: data['login[password]'],
+    }
     const validatedData = authSchema.safeParse(data)
 
     if (!validatedData.success) {
