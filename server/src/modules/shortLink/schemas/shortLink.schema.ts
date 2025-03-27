@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
-import { Types } from 'mongoose'
+import { Document, Types } from 'mongoose'
 import { User } from '../../user/schemas/user.schema'
 
 export enum type {
@@ -10,7 +10,7 @@ export enum type {
 }
 
 @Schema({ timestamps: true, id: false })
-export class ShortLink {
+export class ShortLink extends Document {
     @Prop({ required: true, unique: true })
     shortenLink: string
 

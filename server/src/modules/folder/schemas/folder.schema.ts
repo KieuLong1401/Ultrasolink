@@ -1,9 +1,9 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
-import { Types } from 'mongoose'
+import { Document, Types } from 'mongoose'
 import { User } from '../../user/schemas/user.schema'
 
 @Schema({ timestamps: true, id: false })
-export class Folder {
+export class Folder extends Document {
     @Prop({ required: true })
     name: string
 

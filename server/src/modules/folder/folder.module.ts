@@ -12,5 +12,6 @@ import { Folder, FolderSchema } from './schemas/folder.schema'
     ],
     controllers: [FolderController],
     providers: [FolderService],
+    exports: [FolderService],
 })
-export class ScanModule {}
+export class FolderModule {}

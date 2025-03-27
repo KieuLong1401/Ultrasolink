@@ -3,7 +3,7 @@
 import axiosInstance from '@/utils/axiosInstance'
 import { z } from 'zod'
 
-//
+//alt
 const folders = ['folder1', 'folder2', 'folder3']
 
 const formSchema = z.object({
@@ -31,7 +31,7 @@ export async function createQrCode(prevState: any, formData: FormData) {
     const res = await axiosInstance.post('/short-link', {
         ...formData,
         type: 'link',
-        //
+        //alt
         user: undefined,
     })
 

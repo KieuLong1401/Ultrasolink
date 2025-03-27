@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
-import { HydratedDocument, Types } from 'mongoose'
+import { Document, HydratedDocument, Types } from 'mongoose'
 
 export type UserDocument = HydratedDocument<User>
 
@@ -9,7 +9,7 @@ export enum plan {
 }
 
 @Schema({ timestamps: true, id: false })
-export class User {
+export class User extends Document {
     @Prop({
         unique: true,
     })

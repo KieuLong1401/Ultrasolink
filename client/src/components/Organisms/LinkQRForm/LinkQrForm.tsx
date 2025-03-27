@@ -21,10 +21,8 @@ const initialState = {
     data: undefined,
 }
 
-export default function ServerForm() {
-    const [folder, setFolder] = useState('')
-    const [link, setLink] = useState('')
-    const [name, setName] = useState('')
+export default function LinkQrForm() {
+    const [folder, setFolder] = useState('') //alt
 
     const [state, formAction] = useFormState(createQrCode, initialState)
 
@@ -34,7 +32,7 @@ export default function ServerForm() {
                 name="folder"
                 value={folder}
                 setDropDownValue={setFolder}
-                //
+                //alt
                 options={[
                     { value: 'folder1', label: 'Folder 1' },
                     { value: 'folder2', label: 'Folder 2' },
@@ -46,8 +44,6 @@ export default function ServerForm() {
                 placeholder="Link"
                 type="text"
                 name="link"
-                value={link}
-                setValue={setLink}
                 error={state?.errors?.link}
             />
             <Input
@@ -55,8 +51,6 @@ export default function ServerForm() {
                 placeholder="Name"
                 type="text"
                 name="name"
-                value={name}
-                setValue={setName}
                 error={state?.errors?.name}
             />
 

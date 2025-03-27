@@ -6,11 +6,13 @@ import { UserModule } from '../user/user.module'
 import { JwtModule } from '@nestjs/jwt'
 import { LocalStrategy } from './local.strategy'
 import { JwtStrategy } from './jwt.strategy'
+import { FolderModule } from '../folder/folder.module'
 
 @Module({
     imports: [
         ConfigModule.forRoot(),
         UserModule,
+        FolderModule,
         JwtModule.registerAsync({
             imports: [ConfigModule],
             useFactory: async (configService: ConfigService) => ({

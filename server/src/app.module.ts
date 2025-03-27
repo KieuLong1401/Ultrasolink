@@ -10,6 +10,7 @@ import { APP_GUARD } from '@nestjs/core'
 import { JwtGuard } from './guards/jwt.guard'
 import { JwtStrategy } from './modules/auth/jwt.strategy'
 import { LogMiddleware } from './log.middleware'
+import { FolderModule } from './modules/folder/folder.module'
 
 @Module({
     imports: [
@@ -33,6 +34,7 @@ import { LogMiddleware } from './log.middleware'
         ShortLinkModule,
         ScanModule,
         AuthModule,
+        FolderModule,
     ],
     controllers: [],
     providers: [

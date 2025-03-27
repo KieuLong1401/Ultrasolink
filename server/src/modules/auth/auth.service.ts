@@ -9,12 +9,14 @@ import { User } from '../user/schemas/user.schema'
 import { JwtService } from '@nestjs/jwt'
 import { SignupRequestDto } from './dto/signupRequest.dto'
 import { AccessToken } from 'src/types/AccessToken'
+import { FolderService } from '../folder/folder.service'
 
 @Injectable()
 export class AuthService {
     constructor(
         private userService: UserService,
-        private jwtService: JwtService
+        private jwtService: JwtService,
+        private folderService: FolderService
     ) {}
 
     async validateUser(email: string, password: string): Promise<any> {
@@ -39,9 +41,15 @@ export class AuthService {
         if (existingUser) throw new UnauthorizedException('User already exists')
 
         const hashedPassword = await bcrypt.hash(user.password, 10)
-        const newUser = { ...user, password: hashedPassword } as User
+        const userData = { ...user, password: hashedPassword } as User
 
-        await this.userService.create(newUser)
-        return this.login(newUser)
+        const newUser = (await this.userService.create(userData)) as User
+
+        const defaultFolder = await this.folderService.create({
+            name: 'Default',
+            user: newUser._id.toString(),
+        })
+
+        return this.login(userData)
     }
 }
