@@ -3,16 +3,23 @@
 import styles from './Header.module.css'
 
 import Logo from '../../../../public/logo.svg'
-import Link from 'next/link'
-import NavigateLink from '@/components/Atoms/NavigateLink/NavigateLink'
-import Button from '@/components/Atoms/Button/Button'
+import UserIcon from '../../../../public/icons/userIcon.svg'
 import QrCodeIcon from '../../../../public/icons/qrCodeIcon.svg'
 
+import Link from 'next/link'
+
+import NavigateLink from '@/components/Atoms/NavigateLink/NavigateLink'
+import Button from '@/components/Atoms/Button/Button'
+
 import useDeviceType from '@/hooks/useDeviceType'
+
 import { FC } from 'react'
+import { cookies } from 'next/headers'
+import useAuth from '@/hooks/useAuth'
 
 const Header: FC = () => {
     const device = useDeviceType()
+    const { token, setToken } = useAuth()
 
     return (
         <header className={styles.header}>
@@ -27,15 +34,21 @@ const Header: FC = () => {
                     {device == 'desktop' ? 'My QR Codes' : <QrCodeIcon />}
                 </NavigateLink>
             </nav>
-            <Link href={'/login'}>
-                <Button
-                    className={styles.loginBtn}
-                    shape="round"
-                    color="primary"
-                >
-                    Login
-                </Button>
-            </Link>
+            {token ? (
+                <Link href={'/user_detail'}>
+                    <UserIcon />
+                </Link>
+            ) : (
+                <Link href={'/login'}>
+                    <Button
+                        className={styles.loginBtn}
+                        shape="round"
+                        color="primary"
+                    >
+                        Login
+                    </Button>
+                </Link>
+            )}
         </header>
     )
 }
