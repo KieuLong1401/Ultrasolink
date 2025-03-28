@@ -9,14 +9,12 @@ import { User } from '../user/schemas/user.schema'
 import { JwtService } from '@nestjs/jwt'
 import { SignupRequestDto } from './dto/signupRequest.dto'
 import { AccessToken } from 'src/types/AccessToken'
-import { FolderService } from '../folder/folder.service'
 
 @Injectable()
 export class AuthService {
     constructor(
         private userService: UserService,
-        private jwtService: JwtService,
-        private folderService: FolderService
+        private jwtService: JwtService
     ) {}
 
     async validateUser(email: string, password: string): Promise<any> {
@@ -43,12 +41,7 @@ export class AuthService {
         const hashedPassword = await bcrypt.hash(user.password, 10)
         const userData = { ...user, password: hashedPassword } as User
 
-        const newUser = (await this.userService.create(userData)) as User
-
-        const defaultFolder = await this.folderService.create({
-            name: 'Default',
-            user: newUser._id.toString(),
-        })
+        await this.userService.create(userData)
 
         return this.login(userData)
     }

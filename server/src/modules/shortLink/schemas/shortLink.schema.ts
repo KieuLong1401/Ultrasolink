@@ -17,8 +17,8 @@ export class ShortLink extends Document {
     @Prop({ required: true })
     url: string
 
-    @Prop({ default: null })
-    folder: string | null
+    @Prop({ default: 'Default' })
+    folder: string
 
     @Prop({ default: false })
     isTracked: boolean
