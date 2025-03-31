@@ -14,7 +14,6 @@ import Button from '@/components/Atoms/Button/Button'
 import useDeviceType from '@/hooks/useDeviceType'
 
 import { FC } from 'react'
-import { cookies } from 'next/headers'
 import useAuth from '@/hooks/useAuth'
 
 const Header: FC = () => {

@@ -1,5 +1,4 @@
-import { cookies } from 'next/headers'
-import { createContext, FC, use, useContext, useEffect, useState } from 'react'
+import { createContext } from 'react'
 
 interface AuthContextType {
     token: string | null
