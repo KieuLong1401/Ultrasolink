@@ -1,8 +1,4 @@
-import {
-    BadRequestException,
-    Injectable,
-    UnauthorizedException,
-} from '@nestjs/common'
+import { BadRequestException, Injectable } from '@nestjs/common'
 import { UserService } from '../user/user.service'
 import * as bcrypt from 'bcrypt'
 import { User } from '../user/schemas/user.schema'
@@ -36,13 +32,13 @@ export class AuthService {
 
     async signup(user: SignupRequestDto): Promise<AccessToken> {
         const existingUser = await this.userService.findByEmail(user.email)
-        if (existingUser) throw new UnauthorizedException('User already exists')
+        if (existingUser) throw new BadRequestException('User already exists')
 
         const hashedPassword = await bcrypt.hash(user.password, 10)
         const userData = { ...user, password: hashedPassword } as User
 
-        await this.userService.create(userData)
+        const newUser = await this.userService.create(userData)
 
-        return this.login(userData)
+        return this.login(newUser)
     }
 }

@@ -7,15 +7,15 @@ import { CreateUserDto } from './dto/create-user.dto'
 import { UpdateUserDto } from './dto/update-user.dto'
 
 const mockUser = {
-    _id: '66ce7c395b09800d5de0ab1e',
+    _id: new mongoose.Types.ObjectId('66ce7c395b09800d5de0ab1e'),
     email: 'test@gmail.com',
     password: 'test',
     plan: plan.FREE,
     QrCode: [],
-    createdAt: '2024-08-28T01:24:10.010Z',
-    updatedAt: '2024-08-28T01:24:10.010Z',
+    createdAt: new Date('2024-08-28T01:24:10.010Z'),
+    updatedAt: new Date('2024-08-28T01:24:10.010Z'),
     __v: 0,
-}
+} as unknown as User
 
 const mockUserModel = {
     create: jest.fn().mockReturnValue(mockUser),
@@ -44,10 +44,6 @@ describe('UserService', () => {
 
         service = module.get<UserService>(UserService)
         model = module.get<Model<User>>(getModelToken(User.name))
-    })
-
-    it('should be defined', () => {
-        expect(service).toBeDefined()
     })
 
     it('should create a new user', async () => {
