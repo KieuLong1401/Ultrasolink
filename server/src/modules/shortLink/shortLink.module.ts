@@ -12,5 +12,6 @@ import { ShortLink, ShortLinkSchema } from './schemas/shortLink.schema'
     ],
     controllers: [ShortLinkController],
     providers: [ShortLinkService],
+    exports: [ShortLinkService],
 })
 export class ShortLinkModule {}

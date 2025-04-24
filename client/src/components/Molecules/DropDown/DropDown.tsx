@@ -5,7 +5,7 @@ import styles from './DropDown.module.css'
 import ArrowIcon from '../../../../public/icons/arrowIcon.svg'
 
 interface DropDownProps {
-    options: { value: string; label: string }[]
+    options: string[]
     setDropDownValue: (value: string) => void
     value: string
     name: string
@@ -29,11 +29,11 @@ const DropDown: React.FC<DropDownProps> = ({
             >
                 {options.map((option) => (
                     <option
-                        key={option.value}
-                        value={option.value}
+                        key={option}
+                        value={option}
                         className={styles.option}
                     >
-                        {option.label}
+                        {option}
                     </option>
                 ))}
             </select>

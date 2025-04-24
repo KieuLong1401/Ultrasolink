@@ -13,6 +13,18 @@ async function bootstrap() {
 
     await app.listen(port)
 
+    const server = app.getHttpServer()
+    const router = server._events.request._router
+    const availableRoutes = router.stack
+        .filter((layer) => layer.route)
+        .map((layer) => ({
+            method: Object.keys(layer.route.methods)[0].toUpperCase(),
+            path: layer.route.path,
+        }))
+
+    Logger.log('Available Routes:')
+    console.table(availableRoutes)
+
     Logger.log(`Application is running on port: ${await app.getUrl()}`)
 }
 bootstrap()

@@ -27,10 +27,17 @@ export class ShortLinkService {
         return await this.ShortLinkModel.findById(id).exec()
     }
 
+    async getFoldersByUserId(id: string): Promise<string[]> {
+        const folders = await this.ShortLinkModel.distinct('folder', {
+            user: id,
+        })
+        return folders
+    }
+
     async update(
         id: mongoose.Types.ObjectId,
         updateShortLinkDto: UpdateShortLinkDto
-    ) {
+    ): Promise<ShortLink> {
         return await this.ShortLinkModel.findByIdAndUpdate(
             id,
             updateShortLinkDto

@@ -6,6 +6,7 @@ import { createQrCode } from '@/actions/qrCodeActions'
 import Button from '@/components/Atoms/Button/Button'
 import DropDown from '@/components/Molecules/DropDown/DropDown'
 import Input from '@/components/Molecules/Input/Input'
+import axiosInstance from '@/utils/axiosInstance'
 import { cn } from '@/utils/cn'
 import { cormorantGaramond } from '@/utils/fonts'
 import { useState } from 'react'
@@ -21,10 +22,10 @@ const initialState = {
     data: undefined,
 }
 
-export default function LinkQrForm() {
-    const [folder, setFolder] = useState('') //alt
-
+export default async function LinkQrForm() {
+    const [folder, setFolder] = useState('Default')
     const [state, formAction] = useFormState(createQrCode, initialState)
+    const UserFolders: string[] = await axiosInstance.get('/user/folders')
 
     return (
         <form action={formAction} className={styles.formContainer}>
@@ -33,11 +34,7 @@ export default function LinkQrForm() {
                 value={folder}
                 setDropDownValue={setFolder}
                 //alt
-                options={[
-                    { value: 'folder1', label: 'Folder 1' },
-                    { value: 'folder2', label: 'Folder 2' },
-                    { value: 'folder3', label: 'Folder 3' },
-                ]}
+                options={['Default', ...UserFolders]}
             />
             <Input
                 description="Link to be shortened"
